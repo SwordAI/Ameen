@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>أمين — نظام إدارة الموزع</title>
+    <meta name="description" content="نظام إدارة أعمال الموزع المتنقل - فواتير، زبائن، مخزون، مصاريف">
+    <meta name="theme-color" content="#0D9488">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Toast container -->
+    <div id="toast-container"></div>
+
+    <!-- Header -->
+    <header class="app-header" id="app-header">
+        <div class="header-content">
+            <button class="header-back-btn" id="header-back-btn" style="display:none;" onclick="window.history.back()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
+            <h1 id="page-title">لوحة اليوم</h1>
+            <div class="header-logo">أمين</div>
+        </div>
+    </header>
+
+    <!-- Main content area -->
+    <main id="app" class="app-content"></main>
+
+    <!-- Modal container -->
+    <div class="modal-overlay" id="modal-overlay">
+        <div class="modal" id="modal">
+            <div class="modal-header">
+                <h2 id="modal-title"></h2>
+                <button class="modal-close" id="modal-close">&times;</button>
+            </div>
+            <div class="modal-body" id="modal-body"></div>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav" id="bottom-nav">
+        <a href="#dashboard" class="nav-item active" data-page="dashboard">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="13" width="4" height="7" rx="1"/>
+                <rect x="10" y="9" width="4" height="11" rx="1"/>
+                <rect x="17" y="5" width="4" height="15" rx="1"/>
+            </svg>
+            <span>اليوم</span>
+        </a>
+        <a href="#invoice" class="nav-item" data-page="invoice">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="12" y1="18" x2="12" y2="12"/>
+                <line x1="9" y1="15" x2="15" y2="15"/>
+            </svg>
+            <span>فاتورة</span>
+        </a>
+        <a href="#collection" class="nav-item" data-page="collection">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="9"/>
+                <path d="M12 7v5l3 3"/>
+                <path d="M8.5 14.5c.5 1 1.5 1.5 3.5 1.5s3-.5 3-1.5S14 13 12 13s-3-.5-3-1.5S10.5 10 12 10s2.5.5 3 1.5"/>
+            </svg>
+            <span>تحصيل</span>
+        </a>
+        <a href="#customers" class="nav-item" data-page="customers">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 00-3-3.87"/>
+                <path d="M16 3.13a4 4 0 010 7.75"/>
+            </svg>
+            <span>زبائن</span>
+        </a>
+        <a href="#products" class="nav-item" data-page="products">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/>
+                <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                <line x1="12" y1="22.08" x2="12" y2="12"/>
+            </svg>
+            <span>أصناف</span>
+        </a>
+        <a href="#expenses" class="nav-item" data-page="expenses">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="5" width="20" height="14" rx="2"/>
+                <line x1="2" y1="10" x2="22" y2="10"/>
+            </svg>
+            <span>مصاريف</span>
+        </a>
+    </nav>
+
+    <!-- Scripts -->
+    <script src="js/db.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/invoice.js"></script>
+    <script src="js/collection.js"></script>
+    <script src="js/customers.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/expenses.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
